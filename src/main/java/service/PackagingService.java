@@ -41,7 +41,29 @@ public class PackagingService {
 
                 }
         }
-
+        findCost(packets[itemQuantity], packetPricingMap, item, itemQuantity);
         return packets[itemQuantity];
+    }
+
+    private void findCost(List<Integer> packetsList, Map<Integer, Double> packetPricingMap, String item, Integer itemQuantity) {
+        double totalCost = 0.0;
+        Map<Integer, Integer> countIndividualPackets = new HashMap<>();
+
+        for(Integer optimumPackets : packetsList) {
+            totalCost += packetPricingMap.get(optimumPackets);
+            if (countIndividualPackets.get(optimumPackets) != null) {
+                countIndividualPackets.put(optimumPackets, countIndividualPackets.get(optimumPackets) + 1);
+            } else {
+                countIndividualPackets.put(optimumPackets, 1);
+            }
+        }
+
+        System.out.println(itemQuantity + " " + item + " " + totalCost);
+
+        for (Map.Entry<Integer, Integer> individualCount : countIndividualPackets.entrySet()) {
+            System.out.println(individualCount.getValue() + " x " + individualCount.getKey() + " " +
+                    packetPricingMap.get(individualCount.getKey()));
+        }
+
     }
 }
