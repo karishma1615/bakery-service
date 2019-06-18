@@ -21,6 +21,12 @@ public class BakeryServiceApplication {
                 case "VS5":
                     bakeryItem = new VegemiteScroll();
                     break;
+                case "MB11":
+                    bakeryItem=new BlueberryMuffin();
+                    break;
+                case "CF":
+                    bakeryItem=new Croissant();
+                    break;
             }
             packagingService.findOptimumPackets(bakeryItem.packetDistributionList,
                     Integer.parseInt(inputArray[0]), inputArray[1]);
