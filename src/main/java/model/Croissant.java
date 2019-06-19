@@ -3,7 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Croissant extends BakeryItem {
+public class Croissant extends AbstractBakeryItem {
 
     public Croissant() {
         this.name = "CF";

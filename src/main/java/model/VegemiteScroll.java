@@ -3,7 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VegemiteScroll extends BakeryItem {
+public class VegemiteScroll extends AbstractBakeryItem {
 
     public VegemiteScroll() {
         this.name = "VS5";

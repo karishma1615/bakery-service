@@ -3,7 +3,7 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlueberryMuffin extends BakeryItem {
+public class BlueberryMuffin extends AbstractBakeryItem {
 
     public BlueberryMuffin() {
         this.name = "MB11";

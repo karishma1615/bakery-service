@@ -1,38 +1,51 @@
-import model.BakeryItem;
+import model.AbstractBakeryItem;
 import model.BlueberryMuffin;
 import model.Croissant;
 import model.VegemiteScroll;
 import service.PackagingService;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class BakeryServiceApplication {
 
+    private static final String regexConstant = "\\d+";
+
     public static void main(String args[]) {
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-            String input = bufferedReader.readLine();
+            //take input
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            if (input.isEmpty()) {
+                System.out.println("Empty input given");
+                return;
+            }
+
+            //split item type and quantity
             String[] inputArray = input.split(" ");
+
+            //input must consist of 2 words and first word should be a number
+            if (inputArray.length != 2 || !inputArray[0].matches(regexConstant)) {
+                System.out.println("Wrong input format");
+                return;
+            }
+
             PackagingService packagingService = new PackagingService();
-            BakeryItem bakeryItem=null;
+            AbstractBakeryItem abstractBakeryItem;
+
             switch (inputArray[1]) {
                 case "VS5":
-                    bakeryItem = new VegemiteScroll();
+                    abstractBakeryItem = new VegemiteScroll();
                     break;
                 case "MB11":
-                    bakeryItem=new BlueberryMuffin();
+                    abstractBakeryItem =new BlueberryMuffin();
                     break;
                 case "CF":
-                    bakeryItem=new Croissant();
+                    abstractBakeryItem =new Croissant();
                     break;
+                 default:
+                     throw new IllegalArgumentException("Wrong input format");
             }
-            packagingService.findOptimumPackets(bakeryItem.packetDistributionList,
+
+            packagingService.findOptimumPackets(abstractBakeryItem.packetDistributionList,
                     Integer.parseInt(inputArray[0]), inputArray[1]);
 
-        } catch(IOException e) {
-
-        }
     }
 }
